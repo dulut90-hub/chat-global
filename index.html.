@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat Global</title>
+</head>
+<body>
+  <h1>Halo Dunia 👋</h1>
+  <script>
+    // contoh error
+    notDefinedFunction();
+  </script>
+</body>
+</html>
