@@ -1,1 +1,38 @@
+name: AI Auto Fix
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *" # tiap 1 jam sekali
+
+jobs:
+  ai-fix-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run AI Fix Script
+        run: node ai-fix.js
+        env:
+          GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
+
+      - name: Commit & Push hasil perbaikan
+        run: |
+          git config --global user.name "AI Bot"
+          git config --global user.email "aibot@example.com"
+          git add .
+          git commit -m "🤖 AI Fix otomatis" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} main
