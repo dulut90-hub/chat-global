@@ -1,0 +1,11 @@
+{
+  "name": "chat-global",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node ai-fix.js"
+  },
+  "dependencies": {
+    "@google/genai": "^1.0.0"
+  }
+}
