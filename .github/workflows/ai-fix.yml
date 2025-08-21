@@ -40,6 +40,10 @@ jobs:
         run: |
           git config --global user.name "AI Bot"
           git config --global user.email "aibot@example.com"
-          git add index.html
-          git commit -m "🤖 AI Fix otomatis" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} main
+          # Cek dulu apakah ada perubahan
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "🤖 AI Fix otomatis"
+            git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }} main
+          else
+            echo "Tidak ada perubahan untuk di-commit"
